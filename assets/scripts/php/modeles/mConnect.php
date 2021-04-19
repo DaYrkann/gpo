@@ -10,7 +10,7 @@
 		$req = $bdd->query("SELECT * FROM admin WHERE Login ='".$login."'");
 		$return = $req->fetch();
 		$passwordBDD = $return['Password'];
-		if($password == $passwordBDD) {
+		if(md5($password) == $passwordBDD) {
 			$_SESSION['nameAdmin'] = $return['Login'];
 			$_SESSION['date'] = date("d.m.y");
 			$_SESSION['connected'] = true;
