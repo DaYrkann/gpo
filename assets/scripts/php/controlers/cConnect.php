@@ -10,11 +10,12 @@
 	} else {
 		$login = htmlspecialchars($_POST['login']);
 		$password = htmlspecialchars($_POST['password']);
-
 		if (verifIdAdmin($login, $password)) {
 			$_POST['act'] = 'Home';
 			$view = 'assets/scripts/php/views/connexion/vConnectOk.php';
 		} else {
+			echo('test');
+			exit();
 			$view = 'assets/scripts/php/views/connexion/vError.php';
 		}
 	}
