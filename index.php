@@ -10,6 +10,7 @@
     $_SESSION['date'] = date('d-m-y');
   }
   $ppAct = (isset($_POST['act'])) ? $_POST['act'] : $_POST['act'] = NULL;
+  $_POST['act2'] = (isset($_POST['act2']))? $_POST['act2'] : NULL;
   $act = array('Connect','Home','Deconnect','App');
   if(in_array($ppAct, $act)) {
     include 'assets/scripts/php/controlers/c'.$ppAct.'.php';
