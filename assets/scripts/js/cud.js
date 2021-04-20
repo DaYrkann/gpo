@@ -1,3 +1,11 @@
+/* Note: {} Script de controle des champs de saisie de vRead, ainsi que certain de petit gadget d'effet visuel*/
+
+/**
+* @File ccud.js
+* @autor Yann Le Gall
+* @version 1.0
+*/
+
 var code;
 $(document).ready(()=> {
 	$('#return').on('click', ()=> {
@@ -52,6 +60,9 @@ $(document).ready(()=> {
 
 	$('#btn_valider_delete').on('click', ()=> {
 		$('#delete').submit();
+	});
+	$('#btn_update').on('click', ()=> {
+	
 	});
 
 });
