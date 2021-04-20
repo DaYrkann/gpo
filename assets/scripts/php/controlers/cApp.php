@@ -1,4 +1,9 @@
 <?php
+/**
+* Controler de l'application, formate les bonnes variable et donne les bonnes vues à afficher.
+*
+*
+*/
 	require 'assets/scripts/php/modeles/mApp.php';
 	if($_POST['section'] != 'utilisateur' && $_POST['section'] != 'poste' && $_POST['section'] != 'attribution') {
 		$view = 'assets/scripts/php/views/connexion/vError.php';
@@ -21,7 +26,6 @@
 			$id= 'CodePoste';
 			$column1 = 'Marque';
 			$column2 = 'NumSerie';
-			$column3 = 'Disponibilite';
 			$max = sizeof($data);
 
 			$view = 'assets/scripts/php/views/app/vRead.php';
@@ -46,7 +50,8 @@
 		}
 
 	if(($_POST['section'] == 'Utilisateur' || $_POST['section'] == 'Poste') && $_POST['act2'] == 'delete') {
-		$code = $_POST['id'];
+		$code = $_POST['delete'];
+		exit();
 		$section = lcfirst($_POST['section']);
 		deleteData($section, $code);
 		$messages = 'Entrée éffacée !';
@@ -61,9 +66,35 @@
 		$dataComp = allData($section);
 		$section = 'horaire';
 		$dataTime = allData($section);
+		$dataListeTime = allData('attribution');
 		$maxUsers = sizeof($dataUsers);
 		$maxComp = sizeof($dataComp);
 		$maxTime = sizeof($dataTime);
-		$view = 'assets/scripts/php/views/app/vAttribution.php';
+		$maxListeTime = sizeof($dataListeTime);
+		if($maxListeTime != 0) {
+			$listeTime = true;
+		}
+		$view = 'assets/scripts/php/views/app/vAttrib.php';
+	} 
+
+	if($_POST['section'] == 'attribution' && $_POST['act2'] == 'attribTime') {
+		$jour = date('d-m-y');
+		$data = $_POST['user'];
+		$user = $data[0];
+		$data = $_POST['comp'];
+		$comp = $data[0];
+		$data = $_POST['time'];
+		$time = $data[0];
+		$messages = "Attribution éffectuée.";
+
+		$view = 'assets/scripts/php/views/app/vMessages.php';
+	}
+
+	if($_POST['section'] == 'attribution' && $_POST['act2'] == 'cancel') {
+		$creneau = $_POST['cancel'];
+		cancelTime($creneau);
+		$messages = "Annulation éffectuée.";
+
+		$view = 'assets/scripts/php/views/app/vMessages.php';
 	}
 ?>
