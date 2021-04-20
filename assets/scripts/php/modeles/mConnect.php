@@ -1,8 +1,8 @@
-<?php
+	<?php
 /**
-* 
-*
-*
+* Script de connexion de l'administrateur à l'application
+* @param $login
+* @param $password
 */
 	require 'assets/scripts/php/bdd.php';
 	function verifIdAdmin(string $login, string $password) {
