@@ -11,48 +11,55 @@
 	      <th scope="col">#</th>
 	      <th scope="col"><?= $column1; ?></th>
 	      <th scope="col"><?= $column2; ?></th>
-	      <th scope="col"><?= $column3; ?></th>
+<?php
+		if($section == 'Utilisateur') {
+?>
+			<th scope="col"><?= $column3; ?></th>
+<?php
+	}
+?>	      
 	      <th class="delete" scope="col" hidden>Supprimer</th>
 	    </tr>	
 	</thead>
 	<tbody>
+		<form action="index.php" method="POST" id="delete">
 <?php
 	if($section == 'Utilisateur') {
-		for($i = 0; $i < $max; $i++) {
+		for($contUser = 0; $contUser < $max; $contUser++) {
 ?>
-	<tr>
-		<td><?= $i+1 ?></td>
-		<td><input type="text" value="<?= $data[$i]['Nom']  ?>" disabled /></td>
-		<td><input type="text" value="<?= $data[$i]['Prenom'] ?>" disabled /></td>
-		<td><input type="text" value="<?= $data[$i]['Mail']  ?>" disabled/></td>
-		<td>
-			<form action="index.php" method="POST" id="delete">
-				<input type="radio" name="id" value="<?= $data[$i]['Id']; ?>" hidden / >
-				<input type="hidden" name="act" value="App" />
-				<input type="hidden" name="section" value="<?= $section; ?>" />
-				<input type="hidden" name="act2" value="delete" />
-			</form>
-		</td>
-	</tr>
+		<tr>
+			<td><?= $contUser+1 ?></td>
+			<td><input name ="data" type="text" value="<?= $data[$contUser]['Nom']  ?>" disabled /></td>
+			<td><input name ="data" type="text" value="<?= $data[$contUser]['Prenom'] ?>" disabled /></td>
+			<td><input name ="data" type="text" value="<?= $data[$contUser]['Mail']  ?>" disabled/></td>
+			<td>
+					<input type="radio" name="delete" value="<?= $data[$contUser]['CodeUser']; ?>" hidden / >
+					<input type="hidden" name="act" value="App" />
+					<input type="hidden" name="section" value="<?= $section; ?>" />
+					<input type="hidden" name="act2" value="delete" />
+			</td>
+		</tr>
+	</form>
 <?php
 		}
 	} else {
-		for($i = 0; $i < $max; $i++) {
 ?>
-	<tr>
-		<td><?= $i+1 ?></td>
-		<td><input type="text" value="<?= $data[$i]['Marque']  ?>" disabled /></td>
-		<td><input type="text" value="<?= $data[$i]['NumSerie'] ?>" disabled /></td>
-		<td><input type="text" value="<?= $data[$i]['Disponibilite']  ?>" disabled/></td>
-		<td>
-			<form action="index.php" method="POST" id="delete">
-				<input type="radio" name="id" value="<?= $data[$i]['Id']; ?>" hidden / >
-				<input type="hidden" name="act" value="App" />
-				<input type="hidden" name="section" value="<?= $section; ?>" />
-				<input type="hidden" name="act2" value="delete" />
-			</form>
-		</td>
-	</tr>
+		<form action="index.php" method="POST" id="<?= 'delete'.$contComp ?>">
+<?php
+		for($contComp = 0; $contComp < $max; $contComp++) {
+?>
+			<tr>
+				<td><?= $contComp+1 ?></td>
+				<td><input name ="data" type="text" value="<?= $data[$contComp]['Marque']  ?>" disabled /></td>
+				<td><input name ="data" type="text" value="<?= $data[$contComp]['NumSerie'] ?>" disabled /></td>
+				<td>
+						<input type="radio" name="delete" vname = "data" alue="<?= $data[$contComp]['CodePoste']; ?>" hidden / >
+						<input type="hidden" name="act" value="App" />
+						<input type="hidden" name="section" value="<?= $section; ?>" />
+						<input type="hidden" name="act2" value="delete" />
+				</td>
+			</tr>
+		</form>
 <?php	
 		}				
 	}
